@@ -1,0 +1,1256 @@
+\documentclass[12pt]{book}
+\usepackage{amsmath}
+\begin{document}
+
+\frontmatter
+\title{Differential Equations Notes}
+\author{George Marklow}
+\maketitle
+\tableofcontents
+
+\mainmatter
+
+% Chapter 1: Basic Concepts
+\chapter{Basic Concepts}
+\section{Definitions}
+
+\subsection*{Example 1: Newton’s Second Law as a Differential Equation}
+Newton’s law \(F = ma\) can be expressed in differential form. Since the acceleration \(a\) is the derivative of velocity \(v\) or the second derivative of position \(u\), we have:
+\[
+a = \frac{dv}{dt} \quad \text{or} \quad a = \frac{d^2u}{dt^2}.
+\]
+Thus, the law becomes either:
+\[
+m \frac{dv}{dt} = F(t, v)
+\quad\text{or}\quad
+m \frac{d^2u}{dt^2} = F\left(t, u, \frac{du}{dt}\right).
+\]
+
+\subsection*{Example 2: Various Differential Equations}
+Here are several illustrative forms:
+\begin{align*}
+& (a)\quad ay'' + by' + cy = g(t) \quad\text{(\emph{linear ODE})},\\
+& (b)\quad \sin(y)\frac{d^2y}{dx^2} = (1 - y)\frac{dy}{dx} + y^2 e^{-5y} \quad\text{(\emph{nonlinear ODE})},\\
+& (c)\quad y^{(4)} + 10y''' - 4y' + 2y = \cos(t) \quad\text{(\emph{higher-order ODE})},\\
+& (d)\quad \alpha^2 \frac{\partial^2 u}{\partial x^2} = \frac{\partial u}{\partial t} \quad\text{(\emph{PDE})},\\
+& (e)\quad a^2 u_{xx} = u_{tt} \quad\text{(\emph{wave PDE})},\\
+& (f)\quad \frac{\partial^3 u}{\partial x^2\,\partial t} = 1 + \frac{\partial u}{\partial y} \quad\text{(\emph{mixed PDE})}.
+\end{align*}
+
+\subsection*{Example 3: Checking a Solution and Interval of Validity}
+Show that \( y(x) = x^{-3/2} \) solves
+\[
+4x^2y'' + 12xy' + 3y = 0,
+\]
+for \(x > 0\).
+
+\textbf{Solution:}  
+Compute the derivatives:
+\[
+y' = -\tfrac{3}{2}\,x^{-5/2}, 
+\qquad
+y'' = \tfrac{15}{4}\,x^{-7/2}.
+\]
+Substituting:
+\[
+4x^2\left(\tfrac{15}{4}x^{-7/2}\right)
++ 12x\left(-\tfrac{3}{2}x^{-5/2}\right)
++ 3x^{-3/2}
+= 15x^{-3/2} - 18x^{-3/2} + 3x^{-3/2} = 0.
+\]
+Hence, the equation is satisfied. 
+
+\emph{Interval of validity:} \(y(x) = 1/\sqrt{x^3}\) requires \(x \neq 0\) and to stay real, \(x > 0\). Thus, the solution is valid for \(x > 0\).
+
+\subsection*{Example 4: Meeting Initial Conditions}
+Consider the IVP:
+\[
+4x^2y'' + 12xy' + 3y = 0, \quad y(4) = \tfrac{1}{8}, \quad y'(4) = -\tfrac{3}{64}.
+\]
+\textbf{Solution:}  
+Using \( y(x) = x^{-3/2} \):
+\[
+y(4) = 4^{-3/2} = \tfrac{1}{8}, 
+\qquad
+y'(4) = -\tfrac{3}{2} \cdot 4^{-5/2} = -\tfrac{3}{64},
+\]
+so the solution satisfies the initial conditions.
+
+\subsection*{Example 5: General vs. Actual Solution}
+For the ODE:
+\[
+2t\,y' + 4y = 3:
+\]
+- The \textbf{general solution} is:
+\[
+y(t) = \frac{3}{4} + \frac{C}{t^2}.
+\]
+- Given the IVP with \(y(1) = -4\), solving:
+\[
+-4 = \frac{3}{4} + C \quad\Rightarrow\quad C = -\frac{19}{4}.
+\]
+Thus, the \textbf{actual solution} is:
+\[
+y(t) = \frac{3}{4} - \frac{19}{4t^2}.
+\]
+
+\subsection*{Example 6: Implicit vs. Explicit Solutions}
+Given the IVP:
+\[
+y' = \frac{t}{y}, \quad y(2) = -1.
+\]
+- The \textbf{actual implicit solution} is:
+\[
+y^2 = t^2 - 3.
+\]
+- Solving explicitly:
+\[
+y = \pm\sqrt{t^2 - 3},
+\]
+and using the condition \(y(2) = -1\), we pick the negative root. Hence, the \textbf{actual explicit solution} is:
+\[
+y = -\sqrt{t^2 - 3}.
+\]
+
+\section{Direction Fields}
+
+\subsection*{Example 1: Modeling with a Falling Object}
+From Newton’s second law (\(m \, dv/dt = F\)) and assuming downward velocity is positive, gravity \(mg\) acts downward while air resistance \(F_A\) opposes motion. For a mass \(m = 2\) kg and drag constant \(\gamma = 0.392\), the ODE becomes
+\[
+\frac{dv}{dt} = 9.8 - 0.196v.
+\]
+The corresponding direction field (slope field) plots short line segments at each \((t, v)\), with slope given by the right-hand side.
+
+**Use of the direction field:**
+\begin{itemize}
+  \item It visually represents solution trajectories, showing that solutions flatten out as \(v\) approaches a steady state of \(50\ \mathrm{m}/\mathrm{s}\).
+  \item For the initial condition \(v(0) = 30\), one can trace the solution curve moving upward and approaching the equilibrium \(v = 50\).
+\end{itemize}
+
+\subsection*{Example 2: Interpreting Regions in the Field}
+We inspect slope behavior in different velocity ranges:
+\begin{itemize}
+  \item For \(v < -1\) (e.g. \(v = -2\)), \(dv/dt = 36\) → large positive slope, so arrows are steeply up.
+  \item For \(-1 < v < 1\) (e.g. \(v = 0\)), \(dv/dt = -2\) → gentle downward slope.
+  \item For \(v > 1\) (e.g. \(v = 1.5\)), \(dv/dt = -0.3125\) → mild downward slope.
+\end{itemize}
+
+---
+
+\subsection*{Example 3: Sketch via Isoclines}
+For equations of form \(y' = f(x,y)\), isoclines can guide direction field sketches. Setting \(y' = c\) yields curves \(f(x,y)=c\). On each curve, arrows have the constant slope \(c\).
+
+---
+
+\subsection*{Example 4: Direction Field and Solution for a Linear ODE}
+Consider the linear first-order ODE
+\[
+y' = 3x + 2y - 4,\quad y(0) = 1.
+\]
+The direction field sketches tangents of slope \(3x + 2y - 4\) at each \((x,y)\). A solution curve through \((0,1)\) is shown following those tangents.
+
+The **exact solution** is found by solving:
+\[
+y' - 2y = 3x - 4.
+\]
+Using an integrating factor \(\mu(x) = e^{-2x}\), the solution is
+\[
+y(x) = -\frac{3}{2}x + \frac{5}{4} - \frac{1}{4}e^{2x}.
+\]
+
+---
+
+\subsection*{Example 5: Equilibrium Solutions and Stability Analysis}
+Given
+\[
+y' = (x - 3)(y^2 - 4),
+\]
+observe:
+\begin{itemize}
+  \item Setting \(y' = 0\) yields \(y = \pm2\) as \emph{equilibrium solutions}.
+  \item Direction field analysis:
+    \begin{itemize}
+      \item For initial \(y(0) = 0.5\): solutions approach \(y = -2\) as \(x \to \infty\), indicating \(y = -2\) is \emph{asymptotically stable}.
+      \item For initial values slightly below \(-2\), solutions still move toward \(-2\), reinforcing stability.
+      \item If starting slightly above \(2\), solutions shoot upward, away from \(2\), indicating \(y = 2\) is \emph{unstable}.
+    \end{itemize}
+\end{itemize}
+
+---
+
+\subsection*{Example 6: General Equilibrium Classification}
+Consider
+\[
+y' = (y - 3)^2\,(y^2 + y - 2).
+\]
+Equilibrium points arise when \(y' = 0\), giving \(y = -2\), \(1\), and \(3\). Stability can be inferred from the direction of adjacent arrows:
+\begin{itemize}
+  \item \(y = -2\): arrows above point downward, arrows below point upward ⇒ \emph{stable}.
+  \item \(y = 1\): arrows above and below both move away ⇒ \emph{unstable}.
+  \item \(y = 3\): arrows below move up (toward), arrows above move away ⇒ \emph{semi-stable}.
+\end{itemize}
+
+\section{Final Thoughts}
+
+Before diving into techniques for solving differential equations, it's helpful to pause and reflect on three foundational questions that underpin the subject:
+
+\begin{enumerate}
+  \item \textbf{Existence:}  
+    Will a solution to the differential equation exist?  
+    Not every differential equation has a solution, so it's practical to know in advance whether pursuing a solution is even worthwhile.
+
+  \item \textbf{Uniqueness:}  
+    If a solution exists, how many solutions are there?  
+    Ideally, there should be exactly one solution—for instance, if we model the temperature in a rod under identical conditions, we must expect a unique temperature profile. Otherwise, we couldn't determine which solution applies to the real-world scenario.
+
+  \item \textbf{Solvability:}  
+    If a solution exists and is unique, can we actually find it?  
+    Even when existence and uniqueness are guaranteed, a solution may be impossible to express in closed form. In this course, our primary focus will be on methods that allow us to find explicit solutions in a variety of meaningful cases.
+\end{enumerate}
+
+---
+
+These questions—existence, uniqueness, and solvability—are central to any differential equations course, and they anchor the theory and methods that follow.
+
+
+% Chapter 2: First-Order Differential Equations
+\chapter{First-Order Differential Equations}
+\section{Linear Equations}
+
+\subsection*{Example 1}
+Solve the differential equation:
+\[
+\frac{dv}{dt} = 9.8 - 0.196\,v.
+\]
+\textbf{Solution:}
+Convert to standard form:
+\[
+\frac{dv}{dt} + 0.196\,v = 9.8.
+\]
+Integrating factor:
+\[
+\mu(t) = e^{\int 0.196\,dt} = e^{0.196t}.
+\]
+Multiply through and recognize the product rule:
+\[
+e^{0.196t} \frac{dv}{dt} + 0.196 e^{0.196t} v = \frac{d}{dt}(e^{0.196t} v) = 9.8\,e^{0.196t}.
+\]
+Integrate:
+\[
+e^{0.196t} v = \int 9.8\,e^{0.196t} dt + C = 50\,e^{0.196t} + C.
+\]
+Divide:
+\[
+v(t) = 50 + C\,e^{-0.196t}.
+\]
+
+\subsection*{Example 2 (IVP)}
+Solve the initial value problem:
+\[
+\frac{dv}{dt} = 9.8 - 0.196\,v, \quad v(0) = 48.
+\]
+\textbf{Solution:}
+General solution from Example 1:
+\[
+v(t) = 50 + C\,e^{-0.196t}.
+\]
+Apply initial condition:
+\[
+48 = 50 + C \quad\Longrightarrow\quad C = -2.
+\]
+Thus,
+\[
+v(t) = 50 - 2\,e^{-0.196t}.
+\]
+
+\subsection*{Example 3}
+Solve the IVP:
+\[
+\cos(x)\,y' + \sin(x)\,y = 2\cos^3(x)\sin(x) - 1, \quad y\!\left(\tfrac{\pi}{4}\right) = 3\sqrt{2}, \quad 0 \le x < \tfrac\pi2.
+\]
+\textbf{Solution:}
+Divide by \(\cos(x)\):
+\[
+y' + \tan(x)\,y = 2\cos^2(x)\sin(x) - \sec(x).
+\]
+Integrating factor:
+\[
+\mu(x) = e^{\int \tan(x)\,dx} = \sec(x).
+\]
+Multiply through:
+\[
+\frac{d}{dx}(\sec(x)\,y) = 2\cos(x)\sin(x) - \sec^2(x).
+\]
+Integrate:
+\[
+\sec(x)\,y = -\tfrac12\cos(2x) - \tan(x) + C.
+\]
+So,
+\[
+y = -\tfrac12 \cos(x)\cos(2x) - \sin(x) + C\cos(x).
+\]
+Use \(y(\tfrac\pi4) = 3\sqrt2\):
+\[
+3\sqrt2 = -\tfrac{\sqrt2}{2} + \tfrac{\sqrt2}{2}C \quad\Longrightarrow\quad C = 7.
+\]
+Final solution:
+\[
+y = -\tfrac12 \cos(x)\cos(2x) - \sin(x) + 7\cos(x).
+\]
+
+\subsection*{Example 4}
+Solve the IVP:
+\[
+t\,y' + 2y = t^2 - t + 1, \quad y(1) = \tfrac12.
+\]
+\textbf{Solution:}
+Standard form:
+\[
+y' + \frac{2}{t}y = t - 1 + \frac{1}{t}.
+\]
+Integrating factor:
+\[
+\mu(t) = e^{\int \frac{2}{t}dt} = t^2.
+\]
+Write as derivative:
+\[
+\frac{d}{dt}(t^2 y) = t^3 - t^2 + t.
+\]
+Integrate:
+\[
+t^2 y = \tfrac14 t^4 - \tfrac13 t^3 + \tfrac12 t^2 + C.
+\]
+Divide and apply initial condition \(y(1)=\tfrac12\):
+\[
+\tfrac12 = \tfrac14 - \tfrac13 + \tfrac12 + C \quad\Longrightarrow\quad C = \tfrac{1}{12}.
+\]
+Thus,
+\[
+y = \tfrac14 t^2 - \tfrac13 t + \tfrac12 + \frac{1}{12\,t^2}.
+\]
+
+\subsection*{Example 5}
+Solve the IVP:
+\[
+t\,y' - 2y = t^5\sin(2t) - t^3 + 4t^4, \quad y(\pi) = \tfrac{3}{2}\pi^4.
+\]
+\textbf{Solution:}
+Standard form:
+\[
+y' - \frac{2}{t}y = t^4\sin(2t) - t^2 + 4t^3.
+\]
+Integrating factor:
+\[
+\mu(t) = t^{-2}.
+\]
+Write as derivative:
+\[
+\frac{d}{dt}(t^{-2} y) = t^2\sin(2t) - 1 + 4t.
+\]
+Integrate and simplify:
+\[
+y = -\tfrac12 t^4\cos(2t) + \tfrac12 t^3\sin(2t) + \tfrac14 t^2\cos(2t) - t^3 + 2t^4 + Ct^2.
+\]
+Apply initial condition:
+\[
+\tfrac{3}{2}\pi^4 = -\tfrac12\pi^4 + \tfrac14\pi^2 - \pi^3 + 2\pi^4 + C\pi^2,
+\]
+leading to \(C = \pi - \tfrac14\). So:
+\[
+y = -\tfrac12 t^4\cos(2t) + \tfrac12 t^3\sin(2t) + \tfrac14 t^2\cos(2t) - t^3 + 2t^4 + \left(\pi - \tfrac14\right)t^2.
+\]
+
+\subsection*{Example 6}
+Solve the IVP and analyze long-term behavior:
+\[
+2y' - y = 4\sin(3t), \quad y(0) = y_0.
+\]
+\textbf{Solution:}
+Standard form:
+\[
+y' - \tfrac12 y = 2\sin(3t).
+\]
+Integrating factor:
+\[
+\mu(t) = e^{-\tfrac{t}{2}}.
+\]
+Rewrite:
+\[
+\frac{d}{dt}(e^{-\tfrac{t}{2}} y) = 2e^{-\tfrac{t}{2}} \sin(3t).
+\]
+Integrate (by parts):
+\[
+y = -\tfrac{24}{37}\cos(3t) - \tfrac{4}{37}\sin(3t) + C e^{\tfrac{t}{2}}.
+\]
+Apply initial condition:
+\[
+C = y_0 + \tfrac{24}{37}.
+\]
+So the solution is:
+\[
+y = -\tfrac{24}{37}\cos(3t) - \tfrac{4}{37}\sin(3t) + \left(y_0 + \tfrac{24}{37}\right)e^{\tfrac{t}{2}}.
+\]
+Long-term behavior (\(t \to \infty\)) depends on \(y_0\):
+\begin{itemize}
+  \item If \(y_0 < -\tfrac{24}{37}\): \(y \to -\infty\).
+  \item If \(y_0 = -\tfrac{24}{37}\): \(y\) remains bounded.
+  \item If \(y_0 > -\tfrac{24}{37}\): \(y \to +\infty\).
+\end{itemize}
+
+
+\section{Separable Equations}
+
+\subsection*{Example 1 (IVP with Interval of Validity)}
+\[
+\frac{dy}{dx} = 6y^2x,\quad y(1) = \frac{1}{25}
+\]
+\textbf{Solution:}
+\[
+y^{-2}dy = 6x\,dx \quad\Longrightarrow\quad \int y^{-2}dy = \int 6x\,dx \quad\Longrightarrow\quad -\frac{1}{y} = 3x^2 + C
+\]
+Apply initial condition:
+\[
+-\frac{1}{1/25} = 3\cdot1^2 + C \quad\Rightarrow\quad C = -28
+\]
+So,
+\[
+- \frac{1}{y} = 3x^2 - 28 \quad\Longrightarrow\quad y = \frac{1}{28 - 3x^2}
+\]
+To ensure validity, exclude where denominator is zero:
+\[
+x \neq \pm \sqrt{\tfrac{28}{3}} \approx \pm 3.055
+\]
+Since \(x = 1\) lies in between, the interval of validity is
+\[
+-\sqrt{\tfrac{28}{3}} < x < \sqrt{\tfrac{28}{3}}.
+\]
+
+\subsection*{Example 2 (Quadratic Form in \(y\))}
+\[
+y' = \frac{3x^2 + 4x - 4}{2y - 4},\quad y(1) = 3
+\]
+\textbf{Solution:}
+\[
+(2y - 4)dy = (3x^2 + 4x - 4)dx \quad\Longrightarrow\quad \int (2y - 4)dy = \int (3x^2 + 4x - 4)dx
+\]
+\[
+y^2 - 4y = x^3 + 2x^2 - 4x + C
+\]
+Initial condition yields:
+\[
+9 - 12 = 1 + 2 - 4 + C \quad\Rightarrow\quad C = -2
+\]
+So the implicit solution is:
+\[
+y^2 - 4y = x^3 + 2x^2 - 4x - 2
+\]
+Solving explicitly (via quadratic formula in \(y\)):
+\[
+y = 2 \pm \sqrt{x^3 + 2x^2 - 4x + 2}
+\]
+Matching \(y(1) = 3\) gives \(+\) root:
+\[
+y = 2 + \sqrt{x^3 + 2x^2 - 4x + 2}
+\]
+Ensure the radical is real:
+\[
+x^3 + 2x^2 - 4x + 2 \ge 0 \quad\Rightarrow\quad x \ge -3.36523
+\]
+Thus the interval of validity is:
+\[
+x \ge -3.36523.
+\]
+
+\subsection*{Example 3 (Radical Expression and Domain Constraint)}
+\[
+y' = \frac{x y^3}{\sqrt{1 + x^2}},\quad y(0) = -1
+\]
+\textbf{Solution:}
+\[
+y^{-3} dy = x(1 + x^2)^{-1/2} dx \quad\Longrightarrow\quad \int y^{-3} dy = \int x (1 + x^2)^{-1/2} dx
+\]
+\[
+-\frac{1}{2y^2} = \sqrt{1 + x^2} + C
+\]
+Using the initial condition:
+\[
+- \frac{1}{2} = 1 + C \quad\Rightarrow\quad C = -\frac{3}{2}
+\]
+So,
+\[
+-\frac{1}{2y^2} = \sqrt{1 + x^2} - \tfrac{3}{2} \quad\Longrightarrow\quad y = -\frac{1}{\sqrt{3 - 2\sqrt{1 + x^2}}}
+\]
+Ensure the denominator is positive:
+\[
+3 - 2\sqrt{1 + x^2} > 0 \quad\Rightarrow\quad |x| < \frac{\sqrt{5}}{2}
+\]
+Thus interval of validity:
+\[
+-\frac{\sqrt{5}}{2} < x < \frac{\sqrt{5}}{2}.
+\]
+
+\subsection*{Example 4 (IVP with Exponential Solution and Domain Constraint)}
+\[
+y' = e^{-y}(2x - 4),\quad y(5) = 0
+\]
+\textbf{Solution:}
+\[
+e^y dy = (2x - 4) dx \quad\Longrightarrow\quad \int e^y dy = \int (2x - 4) dx \quad\Longrightarrow\quad e^y = x^2 - 4x + C
+\]
+Applying \(y(5)=0\):
+\[
+1 = 25 - 20 + C \quad\Rightarrow\quad C = -4
+\]
+Hence,
+\[
+e^y = x^2 - 4x - 4 \quad\Longrightarrow\quad y = \ln(x^2 - 4x - 4)
+\]
+Domain constraint (argument of log > 0):
+\[
+x^2 - 4x - 4 > 0 \quad\Rightarrow\quad x < 2 - 2\sqrt{2} \text{ or } x > 2 + 2\sqrt{2}
+\]
+Since \(x = 5\) satisfies the latter, the interval of validity is:
+\[
+x > 2 + 2\sqrt{2}.
+\]
+
+\subsection*{Example 5 (Polar Coordinate Separation)}
+\[
+\frac{dr}{d\theta} = \frac{r^2}{\theta},\quad r(1) = 2
+\]
+\textbf{Solution:}
+\[
+r^{-2} dr = \frac{1}{\theta} d\theta \quad\Longrightarrow\quad \int r^{-2} dr = \int \frac{1}{\theta} d\theta \quad\Longrightarrow\quad -\frac{1}{r} = \ln|\theta| + C
+\]
+Using \(r(1)=2\):
+\[
+-\frac{1}{2} = 0 + C \quad\Rightarrow\quad C = -\frac{1}{2}
+\]
+Thus,
+\[
+-\frac{1}{r} = \ln|\theta| - \frac{1}{2} \quad\Longrightarrow\quad r = \frac{1}{\frac12 - \ln|\theta|}
+\]
+Avoid \(\theta = 0\) and denominator zero (\(\theta = \pm e^{1/2}\)). The interval containing \(\theta=1\) is:
+\[
+0 < \theta < \sqrt{e}.
+\]
+
+\subsection*{Example 6 (Implicit Solution via Integration by Parts)}
+\[
+\frac{dy}{dt} = e^{\,y - t} \sec(y)(1 + t^2),\quad y(0) = 0
+\]
+\textbf{Solution:}
+First separate:
+\[
+e^{-y} \cos(y)\, dy = e^{-t}(1 + t^2) dt
+\]
+Integrating both sides (by parts):
+\[
+\int e^{-y}\cos(y)dy = \int e^{-t}(1 + t^2)dt \quad\Longrightarrow\quad \frac{e^{-y}}{2}(\sin(y) - \cos(y)) = -e^{-t}(t^2 + 2t + 3) + C
+\]
+With initial condition \(y(0)=0\):
+\[
+\frac{1}{2}(-1) = -3 + C \quad\Rightarrow\quad C = \frac{5}{2}
+\]
+So the implicit solution is:
+\[
+\frac{e^{-y}}{2}(\sin(y) - \cos(y)) = -e^{-t}(t^2 + 2t + 3) + \frac{5}{2}
+\]
+An explicit solution isn’t possible in closed form, nor is determining an interval of validity straightforward.
+
+\section{Exact Equations}
+
+\subsection*{Example 1: Demonstrating Exactness and Implicit Solution}
+Solve the differential equation:
+\[
+2xy - 9x^2 + \left(2y + x^2 + 1\right)\frac{dy}{dx} = 0.
+\]
+\textbf{Solution:}
+Assume there exists a function \(\Psi(x,y)\) such that
+\[
+\Psi_x = M = 2xy - 9x^2, 
+\qquad
+\Psi_y = N = 2y + x^2 + 1.
+\]
+Check that the equation is exact:
+\[
+M_y = 2x, 
+\qquad 
+N_x = 2x,
+\]
+so \(M_y = N_x\), confirming exactness.  
+Then, integrate:
+\[
+\Psi(x,y) = \int M \,dx
+= x^2y - 3x^3 + h(y).
+\]
+Differentiate w.r.t.\ \(y\) and set equal to \(N\):
+\[
+\Psi_y = x^2 + h'(y) = 2y + x^2 + 1 \quad\Longrightarrow\quad h'(y) = 2y + 1
+\quad\Longrightarrow\quad h(y) = y^2 + y.
+\]
+Thus,
+\[
+\Psi(x,y) = y^2 + (x^2 + 1)y - 3x^3 = C.
+\]
+This is the implicit general solution to the differential equation.
+
+\subsection*{Example 2: Initial Value Problem with Interval of Validity}
+Solve
+\[
+2xy - 9x^2 + (2y + x^2 + 1)\frac{dy}{dx} = 0, \quad y(0) = -3.
+\]
+\textbf{Solution:}
+Using the result from Example 1:
+\[
+y^2 + (x^2 + 1)y - 3x^3 = C.
+\]
+Apply the initial condition \(y(0) = -3\):
+\[
+9 + (0 + 1)(-3) = C \quad\Longrightarrow\quad C = 6.
+\]
+So the solution is
+\[
+y^2 + (x^2 + 1)y - 3x^3 - 6 = 0.
+\]
+Solve explicitly with the quadratic formula:
+\[
+y(x) = \frac{-(x^2 + 1) \pm \sqrt{x^4 + 12x^3 + 2x^2 + 25}}{2}.
+\]
+Using \(y(0)=-3\) selects the minus branch:
+\[
+y(x) = \frac{-(x^2 + 1) - \sqrt{x^4 + 12x^3 + 2x^2 + 25}}{2}.
+\]
+For the interval of validity, ensure the expression under the square root is non-negative and choose an interval containing \(x=0\), yielding
+\[
+x \geq -1.3969\ (\text{approximately}).
+\]
+
+\subsection*{Example 3: Solving an IVP by Rearrangement and Checking Exactness}
+Solve the IVP:
+\[
+2xy^2 + 4 = 2(3 - x^2 y)\,y', \quad y(-1) = 8.
+\]
+\textbf{Solution:}
+Rearrange to standard form:
+\[
+2xy^2 + 4 + 2(x^2y - 3)y' = 0.
+\]
+Identify:
+\[
+M = 2xy^2 + 4,\quad N = 2x^2y - 6.
+\]
+Check exactness: \(M_y = 4xy\), \(N_x = 4xy\).  
+Integrate \(N\) w.r.t.\ \(y\):
+\[
+\Psi(x,y) = x^2y^2 - 6y + h(x).
+\]
+Differentiate w.r.t.\ \(x\), set equal to \(M\):
+\[
+\Psi_x = 2xy^2 + h'(x) = M \quad\Longrightarrow\quad h'(x) = 4,\quad h(x) = 4x.
+\]
+So
+\[
+\Psi(x,y) = x^2y^2 - 6y + 4x = C.
+\]
+Apply \(y(-1)=8\):
+\[
+1\cdot64 + (-48) - 4 = C \quad\Longrightarrow\quad C = 12.
+\]
+Thus:
+\[
+x^2y^2 - 6y + 4x - 12 = 0,
+\]
+and explicitly,
+\[
+y(x) = \frac{3 + \sqrt{9 + 12x^2 - 4x^3}}{x^2} \quad\text{(choosing the appropriate root)}.
+\]
+The interval of validity excludes \(x=0\) and ensures the radicand is non-negative; containing \(x = -1\), this interval is
+\[
+-\infty < x < 0.
+\]
+
+\subsection*{Example 4: Exact Equation with Logarithmic and Quadratic Terms}
+Solve the IVP:
+\[
+\frac{2ty}{t^2 + 1} - 2t - \left(2 - \ln(t^2 + 1)\right)y' = 0,\quad y(5) = 0.
+\]
+\textbf{Solution:}
+Rearrange:
+\[
+\frac{2ty}{t^2 + 1} - 2t + (\ln(t^2 + 1) - 2)y' = 0.
+\]
+Set:
+\[
+M = \frac{2ty}{t^2 + 1} - 2t, \quad N = \ln(t^2 + 1) - 2.
+\]
+Exactness check: \(M_y = \frac{2t}{t^2 + 1} = N_t\).  
+Integrate \(M\) w.r.t.\ \(t\):
+\[
+\Psi(t,y) = y\ln(t^2 + 1) - t^2 + h(y).
+\]
+Set \(\Psi_y = N\) gives \(h'(y) = -2\), so \(h(y) = -2y\).  
+Thus,
+\[
+\Psi(t,y) = y\ln(t^2 + 1) - t^2 - 2y = C.
+\]
+Applying \(y(5)=0\) gives \(C = -25\), so
+\[
+y\left(\ln(t^2 + 1) - 2\right) - t^2 = -25
+\quad\Longrightarrow\quad
+y = \frac{t^2 - 25}{\ln(t^2 + 1) - 2}.
+\]
+To find the interval of validity, avoid division by zero where \(\ln(t^2 + 1) = 2\), i.e., \(t = \pm\sqrt{e^2 - 1}\). Since \(t = 5\) is in the interval
+\[
+\sqrt{e^2 - 1} < t < \infty,
+\]
+that is the valid interval.
+
+\subsection*{Example 5: Exact Equation Requiring Only Implicit Solution}
+Solve the IVP:
+\[
+3y^3 e^{3xy} - 1 + \left(2y e^{3xy} + 3x y^2 e^{3xy}\right)y' = 0,\quad y(0) = 1.
+\]
+\textbf{Solution:}
+Set:
+\[
+M = 3y^3 e^{3xy} - 1,\quad N = 2y e^{3xy} + 3x y^2 e^{3xy}.
+\]
+Exactness check: Both partials equal \(9y^2 e^{3xy} + 9xy^3 e^{3xy}\).  
+Integrate \(M\) w.r.t.\ \(x\):
+\[
+\Psi(x,y) = y^2 e^{3xy} - x + h(y),\quad h(y) = \text{constant}.
+\]
+Thus,
+\[
+\Psi(x,y) = y^2 e^{3xy} - x = C.
+\]
+Using \(y(0)=1\), we get \(1 - 0 = C\), so
+\[
+y^2 e^{3xy} - x = 1,
+\]
+which is an implicit solution; no explicit solution exists in closed form.
+
+\section{Bernoulli Differential Equations}
+
+\subsection*{Example}
+Solve the differential equation
+\[
+y' + \frac{4}{x} y = x^3\,y^2, \quad x > 0.
+\]
+
+\subsection*{Solution}
+This is a Bernoulli equation of the form
+\[
+y' + p(x)y = q(x)y^n,
+\]
+with \(p(x) = \frac{4}{x}\), \(q(x) = x^3\), and \(n = 2\).
+
+\subsubsection*{Step 1: Use the standard substitution}
+Set
+\[
+v = y^{1 - n} = y^{-1}.
+\]
+Then
+\[
+v' = -(y^{-2}) y'.
+\]
+
+\subsubsection*{Step 2: Rewrite the ODE}
+Starting from the original equation:
+\[
+y' + \frac{4}{x} y = x^3 y^2.
+\]
+Multiply both sides by \(-y^{-2}\):
+\[
+-(y^{-2} y') - \frac{4}{x} y^{-1} = -x^3.
+\]
+Since \(v = y^{-1}\) and \(v' = -y^{-2}y'\), this becomes the linear equation in \(v\):
+\[
+v' - \frac{4}{x} v = -x^3.
+\]
+
+\subsubsection*{Step 3: Solve the linear ODE}
+The integrating factor is
+\[
+\mu(x) = \exp\left( \int -\frac{4}{x} \,dx \right) = x^{-4}.
+\]
+Multiply both sides of the ODE by \(\mu(x)\):
+\[
+x^{-4} v' - \frac{4}{x} x^{-4} v = \frac{d}{dx}(x^{-4} v) = -x^{-1}.
+\]
+Integrate:
+\[
+x^{-4}v = -\int x^{-1}\,dx = -\ln(x) + C.
+\]
+Thus,
+\[
+v = -x^4 \ln(x) + C x^4.
+\]
+
+\subsubsection*{Step 4: Back-substitute for \(y\)}
+Recall \(v = y^{-1}\), so
+\[
+\frac{1}{y} = -x^4 \ln(x) + C x^4
+\quad\Longrightarrow\quad
+y(x) = \frac{1}{x^4 (C - \ln(x))}.
+\]
+
+\subsubsection*{Step 5: Interval of validity}
+Since \(x>0\), we must avoid values where the denominator vanishes:
+\[
+C - \ln(x) \neq 0 \quad\Longrightarrow\quad x \neq e^C.
+\]
+The solution holds on intervals that exclude the singular point \(x = e^{C}\).
+
+
+\section{Substitutions}
+
+\subsection*{Example 1 (Homogeneous Equation via \(y/x\) Substitution)}
+Solve the IVP
+\[
+x\,y\,y' + 4x^2 + y^2 = 0,\quad y(2) = -7,\quad x > 0.
+\]
+\textbf{Solution:}
+Rewriting,
+\[
+\frac{y}{x}y' = -4 - \left(\frac{y}{x}\right)^2.
+\]
+Use the substitution \(v = \tfrac{y}{x}\), hence \(y = xv\) and \(y' = v + x v'\). This turns into
+\[
+v\,(v + x v') + 4 + v^2 = 0 \quad\Longrightarrow\quad x\,v' = -\frac{4 + 2v^2}{v},
+\]
+so
+\[
+\frac{v}{4 + 2v^2}\,dv = -\frac{dx}{x}.
+\]
+Integrating both sides:
+\[
+\frac{1}{4}\ln\!\bigl(4 + 2v^2\bigr) = -\ln(x) + C.
+\]
+Exponentiating and simplifying gives
+\[
+(4 + 2v^2)^{1/4} = \frac{C}{x}
+\quad\Longrightarrow\quad
+y^2 = \frac{C - 4x^4}{2x^2}.
+\]
+Apply the initial condition \(y(2) = -7\):
+\[
+49 = \frac{C - 4\cdot16}{2\cdot4}
+\quad\Longrightarrow\quad
+C = 456.
+\]
+Hence the actual solution is
+\[
+y(x) = -\sqrt{\frac{228 - 2x^4}{x^2}}.
+\]
+Interval of validity: avoid \(x=0\) and ensure the radicand \(\geq 0\). This gives
+\[
+0 < x \le 3.2676.
+\]
+
+\subsection*{Example 2 (Homogeneous after Log Rewrite)}
+Solve the IVP
+\[
+x\,y' = y\left(\ln x - \ln y\right),\quad y(1) = 4,\quad x > 0.
+\]
+\textbf{Solution:}
+Rewriting,
+\[
+y' = \frac{y}{x}\ln\!\left(\frac{x}{y}\right).
+\]
+Set \(v = \tfrac{y}{x}\). Then \(y' = v + x v'\), giving
+\[
+v + x v' = v\ln\left(\frac{1}{v}\right)
+\quad\Longrightarrow\quad
+\frac{dv}{v\left(\ln(1/v) - 1\right)} = \frac{dx}{x}.
+\]
+Integrate:
+\[
+- \ln\left(\ln\left(\frac{1}{v}\right) - 1\right) = \ln(x) + C.
+\]
+Rearrange and exponentiate:
+\[
+\ln\left(\frac{1}{v}\right) - 1 = \frac{c}{x} \quad\Longrightarrow\quad
+v = \exp\left(-\frac{c}{x} - 1\right).
+\]
+Then \(y = xv\). Apply initial condition \(y(1)=4\):
+\[
+4 = \exp\left(-c - 1\right)
+\quad\Longrightarrow\quad
+c = -(1 + \ln4).
+\]
+Thus the solution simplifies to
+\[
+y(x) = x \exp\left(\frac{1 + \ln4}{x} - 1\right).
+\]
+Interval of validity: domain \(x>0\).
+
+\subsection*{Example 3 (Substitution \(v = ax + by\))}
+Solve the IVP
+\[
+y' - \bigl(4x - y + 1\bigr)^2 = 0,\quad y(0) = 2.
+\]
+\textbf{Solution:}
+Use \(v = 4x - y\), so \(v' = 4 - y'\). Then
+\[
+4 - v' - (v + 1)^2 = 0
+\quad\Longrightarrow\quad
+\frac{dv}{(v + 1)^2 - 4} = -dx.
+\]
+Integrate using partial fractions:
+\[
+\frac{1}{4}\left(\ln|v-1| - \ln|v+3|\right) = -x + C.
+\]
+Solve for \(v\):
+\[
+v = \frac{1 + 3c\,e^{-4x}}{1 - c\,e^{-4x}}.
+\]
+Since \(v = 4x - y\), we find
+\[
+y(x) = 4x - \frac{1 + 3c\,e^{-4x}}{1 - c\,e^{-4x}}.
+\]
+Apply \(y(0)=2\):
+\[
+2 = -\frac{1 + 3c}{1 - c}
+\quad\Longrightarrow\quad
+c = -3.
+\]
+Final solution:
+\[
+y(x) = 4x - \frac{1 - 9\,e^{-4x}}{1 + 3\,e^{-4x}}.
+\]
+Interval of validity: all real \(x\) (denominator never zero, exponentials positive).
+
+\subsection*{Example 4 (Substitution in Exponential Form)}
+Solve the IVP
+\[
+y' = e^{9y - x},\quad y(0) = 0.
+\]
+\textbf{Solution:}
+Let \(v = 9y - x\), then \(v' = 9y' - 1\). Substituting:
+\[
+\frac{1}{9}(v' + 1) = e^v 
+\quad\Longrightarrow\quad
+\frac{dv}{9e^v - 1} = dx.
+\]
+Rewriting:
+\[
+\frac{e^{-v}\,dv}{9 - e^{-v}} = dx.
+\]
+Integrate:
+\[
+\ln\left(9 - e^{-v}\right) = x + C
+\quad\Longrightarrow\quad
+v = -\ln\left(9 - c e^x\right).
+\]
+Hence,
+\[
+y(x) = \frac{1}{9}\left(x - \ln\left(9 - c e^x\right)\right).
+\]
+Apply \(y(0)=0\):
+\[
+0 = -\frac{1}{9}\ln(9 - c)
+\quad\Longrightarrow\quad
+c = 8.
+\]
+Thus the solution is
+\[
+y(x) = \frac{1}{9}\left(x - \ln\left(9 - 8e^x\right)\right).
+\]
+Interval of validity:
+\[
+9 - 8e^x > 0 \quad\Longrightarrow\quad x < \ln\frac{9}{8} \approx 0.1178.
+\]
+
+\section{Intervals of Validity}
+
+\subsection*{Theorem 1 (Linear ODEs)}
+Consider the IVP
+\[
+y' + p(t)y = g(t), \qquad y(t_0) = y_0.
+\]
+If \(p(t)\) and \(g(t)\) are continuous on an open interval \(\alpha < t < \beta\), and \(t_0\) lies in this interval, then there exists a unique solution to the IVP on that interval.\\
+Moreover, if \(\alpha < t < \beta\) is the maximal interval of continuity, then this interval is the \textbf{interval of validity} of the solution :contentReference[oaicite:1]{index=1}.
+
+\subsection*{Example 1}
+Without solving, determine the interval of validity for
+\[
+(t^2 - 9)\,y' + 2y = \ln\!\bigl|20 - 4t\bigr|,\qquad y(4) = -3.
+\]
+\textbf{Solution:}
+First, rewrite the equation in standard form:
+\[
+y' + \frac{2}{t^2 - 9}\,y = \frac{\ln|20 - 4t|}{t^2 - 9}.
+\]
+Continuity fails in:
+\[
+p(t) = \frac{2}{t^2 - 9} \quad\text{at } t = \pm 3, \quad
+g(t) = \frac{\ln|20 - 4t|}{t^2 - 9} \quad\text{also at } t = 5.
+\]
+This partitions the real line into four intervals:
+\[
+(-\infty, -3),\quad (-3, 3),\quad (3, 5),\quad (5, \infty).
+\]
+Since \(t_0 = 4\), the applicable interval containing the initial point is
+\[
+\boxed{3 < t < 5}.
+\]
+This is the interval of validity :contentReference[oaicite:2]{index=2}.
+
+\subsection*{Theorem 2 (General ODEs)}
+Consider the IVP
+\[
+y' = f(t, y), \qquad y(t_0) = y_0.
+\]
+If both \(f(t, y)\) and \(\partial f/\partial y\) are continuous within a rectangle
+\[
+\alpha < t < \beta,\quad \gamma < y < \delta
+\]
+containing \((t_0, y_0)\), then the IVP has a unique solution in some smaller interval around \(t_0\) within \(\alpha, \beta\) :contentReference[oaicite:3]{index=3}. However, unlike the linear case, this theorem does not directly yield the interval of validity—knowledge of the solution is often required.
+
+\subsection*{Example 2 (Non-Uniqueness)}
+\[
+y' = y^{1/3}, \qquad y(0) = 0.
+\]
+Here \(f(y) = y^{1/3}\) is continuous, but
+\[
+\frac{df}{dy} = \frac{1}{3 y^{2/3}},
+\]
+is not continuous at \(y = 0\), violating the conditions of Theorem 2 :contentReference[oaicite:4]{index=4}. Indeed, this IVP admits multiple solutions:
+\[
+y = 0,\qquad y = +\left(\tfrac{2}{3}t\right)^{3/2},\qquad y = -\left(\tfrac{2}{3}t\right)^{3/2}.
+\]
+
+\subsection*{Example 3 (Interval of Validity Dependent on Initial Condition)}
+\[
+y' = y^2, \qquad y(0) = y_0.
+\]
+We have a separable equation:
+\[
+\int y^{-2} dy = \int dt \quad\Longrightarrow\quad -\frac{1}{y} = t + C.
+\]
+Using \(y(0) = y_0\):
+\[
+C = -\frac{1}{y_0}, \quad y(t) = \frac{y_0}{1 - y_0 t}.
+\]
+The solution blows up when \(1 - y_0 t = 0\), i.e. at \(t = 1 / y_0\). Thus, the interval of validity depends on the sign of \(y_0\):
+\[
+\begin{cases}
+y_0 > 0: & -\infty < t < \frac{1}{y_0},\\
+y_0 = 0: & -\infty < t < \infty, \quad (y(t) = 0),\\
+y_0 < 0: & \frac{1}{y_0} < t < \infty.
+\end{cases}
+\]
+This example demonstrates how, for nonlinear equations, the interval of validity can depend on the initial condition—unlike the linear case :contentReference[oaicite:5]{index=5}.
+
+\section{Equilibrium Solutions}
+
+An **equilibrium solution** (or equilibrium point) of an autonomous differential equation of the form
+\[
+\frac{dy}{dt} = f(y)
+\]
+is a constant solution \(y(t) = y_0\) such that
+\[
+f(y_0) = 0.
+\]
+We classify equilibrium solutions based on the behavior of nearby solutions:
+- **Unstable**: solutions starting near \(y_0\) move away as \(t\) increases.
+- **Asymptotically stable**: solutions starting near \(y_0\) move toward it as \(t\) increases.
+- **Semi-stable**: solutions on one side move toward, while on the other side move away from \(y_0\) :contentReference[oaicite:1]{index=1}.
+
+---
+
+\subsection*{Example 1}
+\[
+y' = y^2 - y - 6
+\]
+\textbf{Solution:}
+Set \(y' = 0\):
+\[
+y^2 - y - 6 = (y - 3)(y + 2) = 0
+\quad\Longrightarrow\quad
+y = -2,\; y = 3
+\]
+are the equilibrium solutions.
+
+To classify them via sign analysis:
+- For \(y < -2\): say \(y = -3\), \(f(y) = 9 + 3 - 6 = 6 > 0\) → solutions increase.
+- For \(-2 < y < 3\): say \(y = 0\), \(f(y) = -6 < 0\) → solutions decrease.
+- For \(y > 3\): say \(y = 4\), \(f(y) = 16 - 4 - 6 = 6 > 0\) → solutions increase.
+
+Therefore:
+- \(y = -2\): nearby solutions move toward it → **asymptotically stable**.
+- \(y = 3\): nearby solutions move away from it → **unstable** :contentReference[oaicite:2]{index=2}.
+
+---
+
+\subsection*{Example 2}
+\[
+y' = (y^2 - 4)(y + 1)^2
+\]
+\textbf{Solution:}
+Set \(y' = 0\):
+\[
+(y^2 - 4)(y + 1)^2 = 0
+\quad\Longrightarrow\quad
+y = -2,\; y = 2,\; y = -1.
+\]
+
+Sign analysis on each interval:
+- \(y < -2\): choose \(y = -3\), both factors negative → product \(<0\) → solutions decrease.
+- \(-2 < y < -1\): \(y^2 - 4 < 0\), but \((y + 1)^2 > 0\) → product \(<0\) → decrease.
+- \(-1 < y < 2\): \(y^2 - 4 < 0\) and \((y + 1)^2 > 0\) → product \(<0\) → decrease.
+- \(y > 2\): \(y^2 - 4 > 0\), \((y + 1)^2 > 0\) → product \(>0\) → increase.
+
+Thus:
+- \(y = -2\): solutions on both sides move toward it → **asymptotically stable**.
+- \(y = -1\): zero slope but neutral on one side and no crossing → **semi-stable**.
+- \(y = 2\): solutions on both sides move away → **unstable** :contentReference[oaicite:3]{index=3}.
+
+
+\section{Euler’s Method}
+
+We consider the initial-value problem
+\[
+\frac{dy}{dt} = f(t, y), \quad y(t_0) = y_0.
+\]
+Euler’s method approximates the solution numerically using the formula
+\[
+y_{n+1} = y_n + h\,f(t_n, y_n),
+\]
+where \(h\) is the step size and \(t_{n+1} - t_n = h\) :contentReference[oaicite:1]{index=1}.
+
+---
+
+\subsection*{Example 1}
+
+\[
+y' + 2y = 2 - e^{-4t}, \quad y(0) = 1.
+\]
+
+\textbf{Solution:}
+
+First, rewrite as
+\[
+y' = 2 - e^{-4t} - 2y,
+\]
+so \(f(t, y) = 2 - e^{-4t} - 2y\), with initial values \(t_0=0\), \(y_0=1\).
+
+Using \(h = 0.1\):
+
+\[
+f_0 = -1, \quad y_1 = 1 + 0.1 \cdot (-1) = 0.9,
+\]
+\[
+f_1 \approx -0.4703, \quad y_2 \approx 0.8530,
+\]
+\[
+f_2 \approx -0.1553, \quad y_3 \approx 0.8374,
+\]
+\[
+f_3 \approx 0.0239, \quad y_4 \approx 0.8398,
+\]
+\[
+f_4 \approx 0.1184, \quad y_5 \approx 0.8517.
+\]
+
+The exact solution is
+\[
+y(t) = 1 + \tfrac12 e^{-4t} - \tfrac12 e^{-2t}.
+\]
+
+A comparison table:
+
+\begin{tabular}{cccc}
+\hline
+ \(t\) & Approximation & Exact value & Error (\%) \\
+\hline
+0.0 & 1.0000 & 1.0000 & 0.00\% \\
+0.1 & 0.9000 & 0.9258 & 2.79\% \\
+0.2 & 0.8530 & 0.8895 & 4.11\% \\
+0.3 & 0.8374 & 0.8762 & 4.42\% \\
+0.4 & 0.8398 & 0.8763 & 4.16\% \\
+0.5 & 0.8517 & 0.8837 & 3.63\% \\
+\hline
+\end{tabular}
+
+As expected, a finer step size would reduce the error :contentReference[oaicite:2]{index=2}.
+
+---
+
+\subsection*{Example 2}
+
+We repeat Example 1 but extend the domain and vary the step size \(h\):
+
+\[
+t = 1, 2, 3, 4, 5; \quad h = 0.1, 0.05, 0.01, 0.005, 0.001.
+\]
+
+Results (approximation and percentage error):
+
+\begin{tabular}{cccccc}
+\hline
+\(t\) & Exact & \(h=0.1\) & \(h=0.05\) & \(h=0.01\) & \(h=0.001\) \\
+\hline
+1 & 0.9414902 & 0.9313244 (1.08\%) & 0.9364698 (0.53\%) & 0.9404994 (0.105\%) & 0.9413914 (0.01\%) \\
+2 & 0.9910099 & 0.9913681 & 0.9911126 & 0.9910193 & 0.9910106 \\
+3 & 0.9987637 & 0.9990501 & 0.9988982 & 0.9987890 & 0.9987662 \\
+4 & 0.9998323 & 0.9998976 & 0.9998657 & 0.9998390 & 0.9998330 \\
+5 & 0.9999773 & 0.9999890 & 0.9999837 & 0.9999786 & 0.9999774 \\
+\hline
+\end{tabular} :contentReference[oaicite:3]{index=3}
+
+Even finer $h$ yields dramatically improved accuracy, illustrating Euler's method's first-order error convergence.
+
+---
+
+\subsection*{Example 3}
+
+\[
+y' - y = -\tfrac12 e^{t/2} \sin(5t) + 5 e^{t/2} \cos(5t), \quad y(0) = 0.
+\]
+
+The exact solution is
+\[
+y(t) = e^{t/2} \sin(5t).
+\]
+
+Euler’s method shows large errors for this rapidly varying solution, particularly for coarse step sizes:
+- For \(h=0.1\), errors can exceed 100% for larger \(t\).
+- Reducing \(h\) improves accuracy but the error grows with \(t\) due to error propagation :contentReference[oaicite:4]{index=4}.
+
+
+% Chapter 3: Second-Order Differential Equations
+\chapter{Second-Order Differential Equations}
+\section{Basic Concepts}
+\section{Real \& Distinct Roots}
+\section{Complex Roots}
+\section{Repeated Roots}
+\section{Reduction of Order}
+\section{Fundamental Sets of Solutions}
+\section{More on the Wronskian}
+\section{Nonhomogeneous Differential Equations}
+\section{Nonhomogeneous Systems}
+\section{Laplace Transforms}
+\section{Modeling}
+
+% Chapter 4: Series Solutions to Differential Equations
+\chapter{Series Solutions to Differential Equations}
+\section{Review: Power Series}
+\section{Review: Taylor Series}
+\section{Series Solutions}
+\section{Euler Equations}
+
+% Chapter 5: Higher-Order Differential Equations
+\chapter{Higher-Order Differential Equations}
+\section{Basic Concepts for \(n\)th Order Linear Equations}
+\section{Linear Homogeneous Differential Equations}
+\section{Undetermined Coefficients}
+\section{Variation of Parameters}
+\section{Laplace Transforms}
+\section{Systems of Differential Equations}
+
+\backmatter
+
+\end{document}
