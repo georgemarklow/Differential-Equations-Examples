@@ -1224,9 +1224,429 @@ Euler’s method shows large errors for this rapidly varying solution, particula
 % Chapter 3: Second-Order Differential Equations
 \chapter{Second-Order Differential Equations}
 \section{Basic Concepts}
+
+\subsection*{Example}
+Determine some solutions to the homogeneous second-order differential equation:
+\[
+y'' - 9y = 0.
+\]
+
+\subsection*{Expanded Solution}
+We look for solutions of the form \(y(t) = e^{rt}\), which gives:
+\[
+y' = r e^{rt}, 
+\qquad 
+y'' = r^2 e^{rt}.
+\]
+Substituting into the differential equation:
+\[
+r^2 e^{rt} - 9 e^{rt} = 0
+\quad\Longrightarrow\quad
+(r^2 - 9)e^{rt} = 0.
+\]
+Since \(e^{rt} \neq 0\) for all \(t\), it must be that
+\[
+r^2 - 9 = 0 \quad\Longrightarrow\quad r = \pm 3.
+\]
+Therefore, two linearly independent solutions are:
+\[
+y_1(t) = e^{3t},
+\qquad
+y_2(t) = e^{-3t}.
+\]
+
+\subsection*{General Solution via Superposition}
+By the principle of superposition (since the equation is linear and homogeneous), the general solution is:
+\[
+y(t) = C_1 e^{3t} + C_2 e^{-3t},
+\]
+where \(C_1\) and \(C_2\) are arbitrary constants determined by initial conditions.
+
+\subsection*{Verification with an IVP}
+Let’s solve the initial-value problem:
+\[
+y'' - 9y = 0,
+\quad
+y(0) = 2,
+\quad
+y'(0) = -1.
+\]
+Using the general solution:
+\[
+y'(t) = 3C_1 e^{3t} - 3C_2 e^{-3t}.
+\]
+Applying \(t = 0\):
+\[
+y(0) = C_1 + C_2 = 2,
+\qquad
+y'(0) = 3C_1 - 3C_2 = -1.
+\]
+Solving the system:
+\[
+\begin{cases}
+C_1 + C_2 = 2,\\
+3C_1 - 3C_2 = -1,
+\end{cases}
+\quad\Longrightarrow\quad
+C_1 = \tfrac{7}{6},\quad C_2 = \tfrac{5}{6}.
+\]
+Hence, the particular solution is:
+\[
+\boxed{y(t) = \frac{7}{6} e^{3t} + \frac{5}{6} e^{-3t}}.
+\]
+
 \section{Real \& Distinct Roots}
+
+A homogeneous, linear second-order differential equation with constant coefficients has the form:
+
+\[
+a y'' + b y' + c y = 0.
+\]
+
+To solve it:
+\begin{enumerate}
+  \item Form the characteristic equation:
+  \[
+  a r^2 + b r + c = 0.
+  \]
+  \item Find the two real and distinct roots \(r_1\) and \(r_2\).
+  \item The general solution is
+  \[
+  y(t) = c_1 e^{r_1 t} + c_2 e^{r_2 t}.
+  \]
+\end{enumerate}
+
+---
+
+\subsection*{Example 1}
+\[
+y'' + 11y' + 24y = 0, \quad y(0) = 0, \quad y'(0) = -7.
+\]
+
+\textbf{Solution:}
+\[
+\begin{aligned}
+&\text{Characteristic equation: } r^2 + 11r + 24 = 0,\\
+&\Rightarrow (r + 8)(r + 3) = 0 \quad \Longrightarrow r_1 = -8,\; r_2 = -3.
+\end{aligned}
+\]
+Thus,
+\[
+\begin{aligned}
+y(t) &= c_1 e^{-8t} + c_2 e^{-3t},\\
+y'(t) &= -8 c_1 e^{-8t} - 3 c_2 e^{-3t}.
+\end{aligned}
+\]
+Apply initial conditions (\(t=0\)):
+\[
+\begin{cases}
+0 = y(0) = c_1 + c_2, \\
+-7 = y'(0) = -8c_1 - 3c_2.
+\end{cases}
+\]
+Solving yields \(c_1 = \tfrac{7}{5}\), \(c_2 = -\tfrac{7}{5}\). Therefore:
+\[
+\boxed{y(t) = \frac{7}{5}e^{-8t} - \frac{7}{5}e^{-3t}}
+\]
+
+---
+
+\subsection*{Example 2}
+\[
+y'' + 3y' - 10y = 0, \quad y(0) = 4, \quad y'(0) = -2.
+\]
+
+\textbf{Solution:}
+\[
+\begin{aligned}
+& r^2 + 3r - 10 = 0,\\
+&\Rightarrow (r + 5)(r - 2) = 0 \quad \Longrightarrow r_1 = -5, \; r_2 = 2,\\
+&y(t) = c_1 e^{-5t} + c_2 e^{2t},\\
+&y'(t) = -5c_1 e^{-5t} + 2c_2 e^{2t},\\
+\end{aligned}
+\]
+At \(t=0\):
+\[
+\begin{cases}
+4 = c_1 + c_2, \\
+-2 = -5c_1 + 2c_2.
+\end{cases}
+\]
+Solution: \(c_1 = \tfrac{10}{7}\), \(c_2 = \tfrac{18}{7}\). Hence,
+\[
+\boxed{y(t) = \frac{10}{7}e^{-5t} + \frac{18}{7}e^{2t}}
+\]
+
+---
+
+\subsection*{Example 3}
+\[
+3y'' + 2y' - 8y = 0, \quad y(0) = -6, \quad y'(0) = -18.
+\]
+
+**Solution:**
+\[
+\begin{aligned}
+&3r^2 + 2r - 8 = 0 \quad\Rightarrow\quad (3r - 4)(r + 2) = 0,\\
+&\Rightarrow r_1 = \tfrac{4}{3}, \; r_2 = -2,\\
+&y(t) = c_1 e^{\frac{4t}{3}} + c_2 e^{-2t},\\
+&y'(t) = \frac{4}{3}c_1 e^{\frac{4t}{3}} - 2c_2 e^{-2t}.
+\end{aligned}
+\]
+At \(t = 0\):
+\[
+\begin{cases}
+-6 = c_1 + c_2, \\
+-18 = \tfrac{4}{3}c_1 - 2c_2.
+\end{cases}
+\]
+Solving gives \(c_1 = -9\), \(c_2 = 3\), so:
+\[
+\boxed{y(t) = -9 e^{\frac{4t}{3}} + 3 e^{-2t}}
+\]
+
+---
+
+\subsection*{Example 4}
+\[
+4y'' - 5y' = 0, \quad y(-2) = 0, \quad y'(-2) = 7.
+\]
+
+**Solution:**
+\[
+\begin{aligned}
+&4r^2 - 5r = 0 \quad\Rightarrow\quad r(4r - 5) = 0,\\
+&\Rightarrow r_1 = 0, \; r_2 = \tfrac{5}{4},\\
+&y(t) = c_1 + c_2 e^{\frac{5t}{4}},\\
+&y'(t) = \frac{5}{4}c_2 e^{\frac{5t}{4}}.
+\end{aligned}
+\]
+At \(t = -2\):
+\[
+\begin{cases}
+0 = c_1 + c_2 e^{-\frac{5}{2}}, \\
+7 = \tfrac{5}{4}c_2 e^{-\frac{5}{2}}.
+\end{cases}
+\]
+Solving yields:
+\[
+c_1 = -\frac{28}{5}, \quad c_2 = \frac{28}{5}e^{\frac{5}{2}}.
+\]
+Hence:
+\[
+\boxed{y(t) = -\frac{28}{5} + \frac{28}{5}e^{\frac{5}{2}} e^{\frac{5t}{4}}}
+\]
+
+---
+
+\subsection*{Example 5 (Irrational Roots)}
+\[
+y'' - 6y' - 2y = 0.
+\]
+
+**Solution:**
+\[
+\begin{aligned}
+&r^2 - 6r -2 = 0\quad\Rightarrow\quad r_{1,2} = 3 \pm \sqrt{11}, \\
+&\Rightarrow y(t) = c_1 e^{(3 + \sqrt{11})t} + c_2 e^{(3 - \sqrt{11})t}.
+\end{aligned}
+\]
+Even though the roots are “messy,” the solution remains valid:
+\[
+\boxed{y(t) = c_1 e^{(3 + \sqrt{11})t} + c_2 e^{(3 - \sqrt{11})t}}
+\]
+
 \section{Complex Roots}
+
+When a homogeneous linear second-order ODE with constant coefficients,
+\[
+a y'' + b y' + c y = 0,
+\]
+has characteristic roots
+\[
+r_{1,2} = \lambda \pm \mu i,
+\]
+with real parts \(\lambda\) and imaginary parts \(\pm\mu\), the general real-valued solution is
+\[
+y(t) = e^{\lambda t} \bigl(C_1 \cos(\mu t) + C_2 \sin(\mu t)\bigr).
+\]
+---
+
+\subsection*{Example 1}
+Solve the IVP:
+\[
+y'' - 4y' + 9y = 0, \quad y(0) = 0, \quad y'(0) = -8.
+\]
+
+\textbf{Solution:}
+The characteristic equation is
+\[
+r^2 - 4r + 9 = 0.
+\]
+Its roots are
+\[
+r = 2 \pm \sqrt{5}\,i.
+\]
+Thus \(\lambda=2\), \(\mu=\sqrt{5}\). The general solution is
+\[
+y(t) = e^{2t} \bigl(C_1 \cos(\sqrt{5}\,t) + C_2 \sin(\sqrt{5}\,t)\bigr).
+\]
+Apply \(y(0)=0\):
+\[
+0 = C_1 \quad \Rightarrow \quad C_1 = 0.
+\]
+Thus
+\[
+y(t) = C_2\,e^{2t} \sin(\sqrt{5}\,t).
+\]
+Compute the derivative:
+\[
+y'(t) = C_2\,e^{2t}\bigl(2\sin(\sqrt{5}t) + \sqrt{5}\cos(\sqrt{5}t)\bigr).
+\]
+Use \(y'(0) = -8\):
+\[
+-8 = C_2\,\sqrt{5} \quad \Rightarrow \quad C_2 = -\frac{8}{\sqrt{5}}.
+\]
+Thus the explicit solution is
+\[
+\boxed{y(t) = -\frac{8}{\sqrt{5}}\,e^{2t}\sin(\sqrt{5}\,t)}.
+\]
+---
+
+\subsection*{Example 2}
+Solve the IVP:
+\[
+y'' - 8y' + 17y = 0, \quad y(0) = -4, \quad y'(0) = -1.
+\]
+
+\textbf{Solution:}
+The characteristic equation:
+\[
+r^2 - 8r + 17 = 0 \quad \Rightarrow \quad r = 4 \pm i.
+\]
+Thus \(\lambda=4\), \(\mu=1\). General solution:
+\[
+y(t) = e^{4t} \bigl(C_1 \cos t + C_2 \sin t\bigr).
+\]
+From \(y(0)=-4\):
+\[
+-4 = C_1.
+\]
+Differentiate:
+\[
+y'(t) = e^{4t} \Bigl[(4C_1 + C_2)\cos t + (4C_2 - C_1)\sin t\Bigr].
+\]
+At \(t=0\):
+\[
+-1 = 4C_1 + C_2 = -16 + C_2 \quad \Rightarrow \quad C_2 = 15.
+\]
+Hence the solution is
+\[
+\boxed{y(t) = e^{4t}\bigl(-4\cos t + 15\sin t\bigr)}.
+\]
+---
+
+\subsection*{Example 3}
+Solve the IVP:
+\[
+4y'' + 24y' + 37y = 0,\quad y(\pi) = 1,\quad y'(\pi) = 0.
+\]
+
+\textbf{Solution:}
+The characteristic equation:
+\[
+4r^2 + 24r + 37 = 0 \quad \Rightarrow \quad r = -3 \pm \tfrac{1}{2}i.
+\]
+So \(\lambda = -3\), \(\mu = \frac{1}{2}\). General solution:
+\[
+y(t) = e^{-3t}(C_1 \cos\tfrac{t}{2} + C_2 \sin\tfrac{t}{2}).
+\]
+Derivative is
+\[
+y'(t) = e^{-3t}\Bigl[\bigl(-3C_1 + \tfrac{C_2}{2}\bigr)\cos\tfrac{t}{2} + \bigl(-3C_2 - \tfrac{C_1}{2}\bigr)\sin\tfrac{t}{2}\Bigr].
+\]
+Apply \(y(\pi) = 1\):
+\[
+1 = e^{-3\pi} \, C_2 \;(\cos(\tfrac{\pi}{2})=0,\;\sin(\tfrac{\pi}{2})=1)
+\quad\Rightarrow\quad C_2 = e^{3\pi}.
+\]
+Apply \(y'(\pi)=0\):
+\[
+0 = e^{-3\pi}\left(-3C_2 - \tfrac{C_1}{2}\right)\cdot 1
+\quad\Rightarrow\quad -3e^{3\pi} - \tfrac{C_1}{2} = 0 \;\Rightarrow\; C_1 = -6e^{3\pi}.
+\]
+Thus the solution simplifies to:
+\[
+\boxed{y(t) = -6e^{-3(t - \pi)}\cos\left(\tfrac{t}{2}\right) + e^{-3(t - \pi)}\sin\left(\tfrac{t}{2}\right)}.
+\]
+
 \section{Repeated Roots}
+
+When the characteristic equation  
+\[
+a r^2 + b r + c = 0
+\]  
+has a **double root** \(r_1 = r_2 = r\), the usual pair of solutions \(e^{rt}, e^{rt}\) are identical and thus insufficient for forming the general solution :contentReference[oaicite:1]{index=1}.
+
+---
+
+\subsection*{Finding a Second Linearly Independent Solution}
+
+Let one solution be
+\[
+y_1(t) = e^{rt}, \qquad \text{where } r = -\frac{b}{2a}.
+\]
+We look for a second solution of the form
+\[
+y_2(t) = v(t)\,y_1(t) = v(t)\,e^{rt}
+\]
+and substitute into the ODE using reduction of order :contentReference[oaicite:2]{index=2}.
+
+The outcome yields \(v(t) = t\), so the second solution is
+\[
+y_2(t) = t\,e^{rt}.
+\]
+
+Hence, the general solution is:
+\[
+\boxed{y(t) = \bigl(C_1 + C_2 t\bigr)e^{rt}}
+\]
+for the repeated root case of a homogeneous constant-coefficient second-order ODE.
+
+---
+
+\subsection*{Example}
+
+Solve the differential equation:
+\[
+y'' - 6y' + 9y = 0.
+\]
+
+\textbf{Solution:}
+
+1. **Characteristic equation**:
+   \[
+   r^2 - 6r + 9 = 0 \quad\Longrightarrow\quad (r - 3)^2 = 0 \quad\Rightarrow\quad r = 3 \text{ (double root)}
+   \]
+
+2. **First solution**:
+   \[
+   y_1(t) = e^{3t}
+   \]
+
+3. **Second solution via standard method**:
+   \[
+   y_2(t) = t\,e^{3t}
+   \]
+
+4. **General solution**:
+   \[
+   \boxed{y(t) = \bigl(C_1 + C_2 t\bigr)e^{3t}}
+   \]
+
+This matches the form expected for double-root cases and follows from the reduction of order approach :contentReference[oaicite:3]{index=3}.
+
+
 \section{Reduction of Order}
 \section{Fundamental Sets of Solutions}
 \section{More on the Wronskian}
